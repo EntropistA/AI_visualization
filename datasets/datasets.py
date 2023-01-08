@@ -7,6 +7,7 @@ import pandas as pd
 PROJECT_NAME = "AI_visualization"
 
 
+# TODO: fix so that any root name works
 @contextmanager
 def project_root():
     previous_cwd = Path.cwd()
@@ -19,7 +20,6 @@ def project_root():
 
 def k_to_thousand(number: str) -> float:
     return float(number.rstrip("k")) * 1000 if number.endswith("k") else number
-
 
 
 def countries_and_gdp(year=2019, normalize=True):
