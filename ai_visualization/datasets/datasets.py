@@ -19,7 +19,7 @@ def project_root():
     previous_cwd = Path.cwd()
     project_root_index = list_rindex(previous_cwd.parts, PROJECT_NAME)
     new_directory = Path(*previous_cwd.parts[:project_root_index + 1])
-    if any("requirements.txt" in item for item in previous_cwd.iterdir()):
+    if any("requirements.txt" == item.name for item in previous_cwd.iterdir()):
         new_directory = Path(new_directory, "ai_visualization")
     os.chdir(new_directory)
     try:
