@@ -19,6 +19,8 @@ def project_root():
     previous_cwd = Path.cwd()
     project_root_index = list_rindex(previous_cwd.parts, PROJECT_NAME)
     new_directory = Path(*previous_cwd.parts[:project_root_index + 1])
+    if any("requirements.txt" in item for item in previous_cwd.iterdir()):
+        new_directory = Path(new_directory, "ai_visualization")
     os.chdir(new_directory)
     try:
         yield
@@ -35,7 +37,7 @@ def countries_and_gdp(year=2019, normalize=True):
 
     income_file_location = Path("datasets", "income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
     with project_root():
-        raise ValueError(list(Path.cwd().iterdir()), income_file_location, income_file_location.exists())
+        # raise ValueError(list(Path.cwd().iterdir()), income_file_location, income_file_location.exists())
         income = pd.read_csv(income_file_location, usecols=columns)
     income.rename(columns={str(year): "gdp"}, inplace=True)
     income["gdp"] = income["gdp"].apply(k_to_thousand)
