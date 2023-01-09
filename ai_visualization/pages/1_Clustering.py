@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-from utils import distance
-from datasets import datasets
+from ai_visualization.utils import distance
+from ai_visualization.datasets import datasets
 
 
 def min_max_normalizer(column: pd.Series):

@@ -4,18 +4,26 @@ from contextlib import contextmanager
 
 import pandas as pd
 
-PROJECT_NAME = "AI_visualization"
+PROJECT_NAME = "ai_visualization"
 
 
-# TODO: fix so that any root name works
+def list_rindex(list_, target):
+    for i in reversed(range(len(list_))):
+        if list_[i] == target:
+            return i
+    raise ValueError(f"{target} not found")
+
+
 @contextmanager
 def project_root():
     previous_cwd = Path.cwd()
-    project_root_index = previous_cwd.parts.index(PROJECT_NAME)
+    project_root_index = list_rindex(previous_cwd.parts, PROJECT_NAME)
     new_directory = Path(*previous_cwd.parts[:project_root_index + 1])
     os.chdir(new_directory)
-    yield
-    os.chdir(previous_cwd)
+    try:
+        yield
+    finally:
+        os.chdir(previous_cwd)
 
 
 def k_to_thousand(number: str) -> float:
