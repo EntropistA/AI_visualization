@@ -35,6 +35,7 @@ def countries_and_gdp(year=2019, normalize=True):
 
     income_file_location = Path("datasets", "income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
     with project_root():
+        print(Path.cwd(), income_file_location.exists())
         income = pd.read_csv(income_file_location, usecols=columns)
     income.rename(columns={str(year): "gdp"}, inplace=True)
     income["gdp"] = income["gdp"].apply(k_to_thousand)
